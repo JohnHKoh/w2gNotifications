@@ -1,0 +1,1 @@
+Adds sound notifications for Watch2Gether site for others' chat messages.
