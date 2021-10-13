@@ -4,7 +4,8 @@
     "manifest_version": 2,
     "version": "1.0",
     "permissions": [
-        "activeTab",
+        "tabs",
+        "storage",
         "https://w2g.tv/rooms/*"
     ],
     "content_scripts": [
@@ -22,6 +23,15 @@
         }
     ],
     "web_accessible_resources": [
-        "assets/chat.mp3"
-    ]
+        "assets/pop.mp3",
+        "assets/msn.mp3"
+    ],
+    "icons": {
+        "128": "assets/icon128.png"
+    },
+    "browser_action": {
+        "default_icon": "assets/icon128.png",
+        "default_title": "Click here to open menu",
+        "default_popup": "src/menu.html"
+    }
 }
