@@ -8,7 +8,6 @@ $(function () {
         else {
             $("#sound-select").val("pop");
         }
-        
     });
     $("#sound-select").change(function() {
         chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
