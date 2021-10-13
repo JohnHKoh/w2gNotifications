@@ -16,9 +16,6 @@
             "js": [
                 "lib/jquery-3.6.0.min.js",
                 "content-script.js"
-            ],
-            "css": [
-                "content-style.css"
             ]
         }
     ],

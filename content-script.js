@@ -13,7 +13,7 @@ chrome.storage.sync.get(['sound'], function (result) {
 });
 
 function startChatObserver() {
-    const config = { attributes: true, childList: true, subtree: false };
+    const config = { childList: true };
 
     const callback = function (mutationsList, observer) {
         for (const mutation of mutationsList) {
