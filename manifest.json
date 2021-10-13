@@ -1,0 +1,27 @@
+{
+    "name": "w2g Noti",
+    "description": "Notifications for Watch2Gether",
+    "manifest_version": 2,
+    "version": "1.0",
+    "permissions": [
+        "activeTab",
+        "https://w2g.tv/rooms/*"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "https://w2g.tv/rooms/*"
+            ],
+            "js": [
+                "lib/jquery-3.6.0.min.js",
+                "content-script.js"
+            ],
+            "css": [
+                "content-style.css"
+            ]
+        }
+    ],
+    "web_accessible_resources": [
+        "assets/chat.mp3"
+    ]
+}
