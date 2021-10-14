@@ -1,15 +1,11 @@
 function initializePlayer(startFn) {
-    let chatSound = Constants.DEFAULT_SOUND;
-    chrome.storage.sync.get(['sound'], function(result) {
-        if (result.sound) {
-            chatSound = result.sound;
-        }
-        startFn(chatSound);
+    chrome.storage.sync.get(['theyMessageSound', 'meMessageSound'], function(result) {
+        startFn(result);
     });
 }
 
-function startPlayer(chatSound) {
-    const player = new SoundPlayer(chatSound);
+function startPlayer(soundOptions) {
+    const player = new SoundPlayer(soundOptions);
     player.start();
 }
 

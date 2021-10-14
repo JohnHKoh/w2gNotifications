@@ -12,13 +12,34 @@
 <body>
     <div class="row">
         <div class="column">
-            <p>Select Sound</p>
+            <p>Select Me Message Sound</p>
         </div>
         <div class="column">
-            <select class="w100" id="sound-select">
+            <select class="w100" data-sound="meMessageSound">
+                <option value="none">None</option>
                 <option value="pop">Pop</option>
                 <option value="msn">MSN</option>
             </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <p>Select They Message Sound</p>
+        </div>
+        <div class="column">
+            <select class="w100" data-sound="theyMessageSound">
+                <option value="none">None</option>
+                <option value="pop">Pop</option>
+                <option value="msn">MSN</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <button class="w100" id="muteAllBtn">Mute All</button>
+        </div>
+        <div class="column">
+            <button class="w100" id="restoreDefaultsBtn">Restore Defaults</button>
         </div>
     </div>
 </body>

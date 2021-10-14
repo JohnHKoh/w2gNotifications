@@ -1,7 +1,10 @@
 class Constants {
     
-    static get DEFAULT_SOUND() {
-        return "pop";
+    static get DEFAULT_SOUNDS() {
+        return {
+            "meMessageSound": "none",
+            "theyMessageSound": "pop"
+        }
     }
 
     static get W2G_ROOM_PATTERN() {
