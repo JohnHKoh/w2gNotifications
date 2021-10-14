@@ -1,29 +1,49 @@
 'use strict';
 
-$(function () {
-    chrome.storage.sync.get(['sound'], function (result) {
+const selectId = "#sound-select";
+
+function restoreOptions() {
+    return chrome.storage.sync.get(['sound'], function(result) {
         if (result.sound) {
-            $("#sound-select").val(result.sound);
+            $(selectId).val(result.sound);
         }
         else {
-            $("#sound-select").val("pop");
+            $(selectId).val(Constants.DEFAULT_SOUND);
         }
     });
-    $("#sound-select").change(function() {
-        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-            const message = {
-                type: "changeSound",
-                sound: $(this).val()
-            }
-            chrome.tabs.query({ url: "https://w2g.tv/rooms/*" }, tabs => {
-                tabs.forEach(tab => {
-                    chrome.tabs.sendMessage(tab.id, message, function(response) {
-                        chrome.storage.sync.set({ sound: message.sound }, function () {
-                            window.close();
-                        });
-                    });
-                });
+}
+
+function saveOptions(options) {
+    chrome.storage.sync.set(options, function () {
+        window.close();
+    });
+}
+
+function handleChange(e) {
+    const message = {
+        type: "changeSound",
+        sound: $(this).val()
+    };
+    const queryObject = {
+        url: Constants.W2G_ROOM_PATTERN
+    };
+    sendMessageToTab(queryObject, message);
+}
+
+function sendMessageToTab(queryObject, message) {
+    chrome.tabs.query(queryObject, tabs => {
+        tabs.forEach(tab => {
+            chrome.tabs.sendMessage(tab.id, message, function(response) {
+                const options = {
+                    sound: message.sound
+                };
+                saveOptions(options);
             });
         });
     });
+}
+
+$(async function () {
+    await restoreOptions();
+    $(selectId).change(handleChange);
 });
