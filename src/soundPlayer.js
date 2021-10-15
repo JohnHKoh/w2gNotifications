@@ -1,8 +1,5 @@
 const targetNode = $('.w2g-chat-messages')[0];
-const MessageType = {
-    TheyMessage: "theyMessageSound",
-    MeMessage: "meMessageSound"
-}
+const MessageType = Constants.MESSAGE_TYPE;
 
 class SoundPlayer {
 
@@ -12,7 +9,8 @@ class SoundPlayer {
     }
 
     constructor(soundOptions) {
-        this.audioPlayer = Object.values(MessageType).reduce((accum, msgType) => {
+        this.volume = soundOptions.volume ?? 1;
+        this.audioPlayer = Constants.SOUNDS_LIST.reduce((accum, msgType) => {
             const chatSound = soundOptions[msgType] ?? Constants.DEFAULT_SOUNDS[msgType];
             accum[msgType] = SoundPlayer.getAudio(chatSound);
             return accum;
@@ -47,11 +45,20 @@ class SoundPlayer {
     }
 
     getMessageType(messageNode) {
-        if (messageNode.classList.contains('mucmsg') && messageNode.classList.contains('w2g-they')) {
+        const classes = messageNode.classList;
+        if (classes.contains('mucmsg') && classes.contains('w2g-they')) {
             return MessageType.TheyMessage;
         }
-        if (messageNode.classList.contains('mucmsg') && messageNode.classList.contains('w2g-me')) {
+        if (classes.contains('mucmsg') && classes.contains('w2g-me')) {
             return MessageType.MeMessage;
+        }
+        if (classes.contains('usermsg') && classes.contains('w2g-they')) {
+            if ($(messageNode).find('.w2g-chat-message-text').text() === "User joined room") {
+                return MessageType.UserJoinMessage;
+            }
+            if ($(messageNode).find('.w2g-chat-message-text').text() === "User left room") {
+                return MessageType.UserLeaveMessage;
+            }
         }
     }
 
@@ -63,18 +70,29 @@ class SoundPlayer {
                         this.setSound(message.optionType, message.optionValue);
                         sendResponse({[message.optionType]: message.optionValue});
                         break;
+                    case "changeVolume":
+                        this.setVolume(message.optionValue);
+                        sendResponse({volume: message.optionValue});
                 }
             }
         );
     }
 
     playSound(messageType) {
-        if (this.audioPlayer[messageType]) {
-            this.audioPlayer[messageType].play();
+        const audio = this.audioPlayer[messageType];
+        if (audio) {
+            audio.pause();
+            audio.currentTime = 0;
+            audio.volume = this.volume;
+            audio.play();
         }
     }
 
     setSound(type, value) {
         this.audioPlayer[type] = SoundPlayer.getAudio(value);
+    }
+
+    setVolume(volume) {
+        this.volume = volume;
     }
 }

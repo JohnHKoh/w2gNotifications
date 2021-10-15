@@ -1,7 +1,7 @@
 'use strict';
 
 function restoreOptions() {
-    return chrome.storage.sync.get(['theyMessageSound', 'meMessageSound'], function(result) {
+    return chrome.storage.sync.get([...Constants.SOUNDS_LIST, 'volume'], function(result) {
         $("select").each(function(i) {
             const soundType = $(this).data('sound');
             const sound = result[soundType];
@@ -12,12 +12,13 @@ function restoreOptions() {
                 $(this).val(Constants.DEFAULT_SOUNDS[soundType]);
             }
         });
+        $("#volumeSlider").val(result.volume ?? 1);
     });
 }
 
 function saveOptions(options) {
     chrome.storage.sync.set(options, function () {
-        window.close();
+        //window.close();
     });
 }
 
@@ -27,10 +28,7 @@ function handleChange(e) {
         optionType: $(this).data('sound'),
         optionValue: $(this).val()
     };
-    const queryObject = {
-        url: Constants.W2G_ROOM_PATTERN
-    };
-    sendMessageToTab(queryObject, message);
+    sendMessageToTab(Constants.W2G_TAB_QUERY, message);
 }
 
 function sendMessageToTab(queryObject, message) {
@@ -41,6 +39,14 @@ function sendMessageToTab(queryObject, message) {
             });
         });
     });
+}
+
+function handleVolumeChange(e) {
+    const message = {
+        type: "changeVolume",
+        optionValue: $(this).val()
+    };
+    sendMessageToTab(Constants.W2G_TAB_QUERY, message);
 }
 
 function handleMuteAllBtn(e) {
@@ -54,11 +60,13 @@ function handleRestoreDefaultsBtn(e) {
         const soundType = $(this).data('sound');
         $(this).val(Constants.DEFAULT_SOUNDS[soundType]).change();
     });
+    $("#volumeSlider").val(1).change();
 }
 
 $(async function () {
     await restoreOptions();
     $("select").change(handleChange);
+    $("#volumeSlider").change(handleVolumeChange);
     $("#muteAllBtn").click(handleMuteAllBtn);
     $("#restoreDefaultsBtn").click(handleRestoreDefaultsBtn);
 });

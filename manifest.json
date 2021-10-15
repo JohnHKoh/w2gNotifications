@@ -22,8 +22,7 @@
         }
     ],
     "web_accessible_resources": [
-        "assets/pop.mp3",
-        "assets/msn.mp3"
+        "assets/*.mp3"
     ],
     "icons": {
         "128": "assets/icon128.png"

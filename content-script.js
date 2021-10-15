@@ -1,5 +1,5 @@
 function initializePlayer(startFn) {
-    chrome.storage.sync.get(['theyMessageSound', 'meMessageSound'], function(result) {
+    chrome.storage.sync.get([...Constants.SOUNDS_LIST, 'volume'], function(result) {
         startFn(result);
     });
 }

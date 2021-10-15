@@ -11,29 +11,67 @@
 
 <body>
     <div class="row">
+        Sound Settings
+    </div>
+    <hr>
+    <div class="row">
         <div class="column">
-            <p>Select Me Message Sound</p>
+            <p>Me Message</p>
         </div>
         <div class="column">
             <select class="w100" data-sound="meMessageSound">
                 <option value="none">None</option>
                 <option value="pop">Pop</option>
                 <option value="msn">MSN</option>
+                <option value="beep">Beep</option>
             </select>
         </div>
     </div>
     <div class="row">
         <div class="column">
-            <p>Select They Message Sound</p>
+            <p>They Message</p>
         </div>
         <div class="column">
             <select class="w100" data-sound="theyMessageSound">
                 <option value="none">None</option>
                 <option value="pop">Pop</option>
                 <option value="msn">MSN</option>
+                <option value="beep">Beep</option>
             </select>
         </div>
     </div>
+    <div class="row">
+        <div class="column">
+            <p>User Join</p>
+        </div>
+        <div class="column">
+            <select class="w100" data-sound="userJoinMessageSound">
+                <option value="none">None</option>
+                <option value="discordjoin">Discord Join</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <p>User Leave</p>
+        </div>
+        <div class="column">
+            <select class="w100" data-sound="userLeaveMessageSound">
+                <option value="none">None</option>
+                <option value="discordleave">Discord Leave</option>
+            </select>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="column">
+            <p>Volume</p>
+        </div>
+        <div class="column">
+            <input id="volumeSlider" type="range" min="0" max="1" step="0.01" value="1">
+        </div>
+    </div>
+    <hr>
     <div class="row">
         <div class="column">
             <button class="w100" id="muteAllBtn">Mute All</button>
