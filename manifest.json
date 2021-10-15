@@ -1,6 +1,6 @@
 {
-    "name": "w2g Noti",
-    "description": "Notifications for Watch2Gether",
+    "name": "w2g Notifications",
+    "description": "Sound notifications for Watch2Gether",
     "manifest_version": 2,
     "version": "1.0",
     "permissions": [
