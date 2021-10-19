@@ -26,10 +26,4 @@ class Constants {
     static get W2G_ROOM_PATTERN() {
         return "https://w2g.tv/rooms/*";
     }
-
-    static get W2G_TAB_QUERY() {
-        return {
-            url: Constants.W2G_ROOM_PATTERN
-        };
-    }
 }

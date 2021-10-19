@@ -73,7 +73,9 @@ class SoundPlayer {
                     case "changeVolume":
                         this.setVolume(message.optionValue);
                         sendResponse({volume: message.optionValue});
+                        break;
                 }
+                return true;
             }
         );
     }

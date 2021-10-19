@@ -46,7 +46,7 @@ function handleVolumeChange(e) {
         type: "changeVolume",
         optionValue: $(this).val()
     };
-    sendMessageToTab(Constants.W2G_TAB_QUERY, message);
+    sendMessageToTab({}, message);
 }
 
 function handleMuteAllBtn(e) {
