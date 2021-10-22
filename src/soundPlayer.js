@@ -18,7 +18,7 @@ class SoundPlayer {
     }
 
     start() {
-        this.listenForMessages();
+        if (targetNode) this.listenForMessages();
         this.listenForOptionChange();
     }
 

@@ -28,7 +28,7 @@ function handleChange(e) {
         optionType: $(this).data('sound'),
         optionValue: $(this).val()
     };
-    sendMessageToTab(Constants.W2G_TAB_QUERY, message);
+    sendMessageToTab({}, message);
 }
 
 function sendMessageToTab(queryObject, message) {

@@ -10,7 +10,7 @@
     "content_scripts": [
         {
             "matches": [
-                "https://w2g.tv/rooms/*"
+                "<all_urls>"
             ],
             "js": [
                 "lib/jquery-3.6.0.min.js",
